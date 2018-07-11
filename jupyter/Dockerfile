@@ -2,7 +2,7 @@
 FROM jupyter/scipy-notebook:latest
 
 # Install python3 libraries
-RUN pip install geopandas netCDF4 shapely
+# RUN pip install geopandas netCDF4 shapely
 
 # Create a Python 2.x environment using conda including at least the ipython kernel
 # and the kernda utility. Add any additional packages you want available for use
