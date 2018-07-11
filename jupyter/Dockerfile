@@ -4,13 +4,13 @@ FROM jupyter/scipy-notebook:latest
 # Create a Python 2.x environment using conda including at least the ipython kernel
 # and the kernda utility. Add any additional packages you want available for use
 # in a Python 2 notebook to the first line here (e.g., pandas, matplotlib, etc.)
-RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda && \
+RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda gdal && \
     conda clean -tipsy
 
-COPY requirements.txt /tmp/
-RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+#COPY requirements.txt /tmp/
+#RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
+#    fix-permissions $CONDA_DIR && \
+#    fix-permissions /home/$NB_USER
 
 USER root
 
