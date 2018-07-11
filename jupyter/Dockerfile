@@ -1,10 +1,13 @@
 # Choose your desired base image
 FROM jupyter/scipy-notebook:latest
 
+# Install python3 libraries
+RUN pip install geopandas netCDF4 shapely
+
 # Create a Python 2.x environment using conda including at least the ipython kernel
 # and the kernda utility. Add any additional packages you want available for use
 # in a Python 2 notebook to the first line here (e.g., pandas, matplotlib, etc.)
-RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda gdal geopandas netCDF4 shapely && \
+RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda gdal && \
     conda clean -tipsy
 
 COPY requirements.txt /tmp/
