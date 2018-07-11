@@ -4,5 +4,5 @@ geopandas
 pyqtgraph
 h5py
 matplotlib
-scipy
 threedigrid[geo,results]
+scipy
