@@ -1,5 +1,5 @@
 # Choose your desired base image
-FROM jupyter/scipy-notebook
+FROM jupyter/scipy-notebook:latest
 
 # Create a Python 2.x environment using conda including at least the ipython kernel
 # and the kernda utility. Add any additional packages you want available for use
