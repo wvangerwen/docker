@@ -9,8 +9,9 @@ RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipy
 
 COPY requirements.txt /tmp/
 RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip
-RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
-    fix-permissions $CONDA_DIR && \
+# RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
+RUN $CONDA_DIR/envs/python2/bin/pip install netCDF4 shapely geopandas pyqtgraph h5py matplotlib scipy threedigrid[geo,results] && \
+fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
 USER root
