@@ -1,2 +1,8 @@
-netCDF4 
-shapely geopandas pyqtgraph h5py matplotlib scipy threedigrid[geo,results]
+netCDF4
+shapely
+geopandas
+pyqtgraph
+h5py
+matplotlib
+scipy
+threedigrid[geo,results]
