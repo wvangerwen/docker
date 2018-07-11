@@ -7,6 +7,11 @@ FROM jupyter/scipy-notebook:latest
 RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda && \
     conda clean -tipsy
 
+COPY requirements.txt /tmp/
+RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
 USER root
 
 # Create a global kernelspec in the image and modify it so that it properly activates
