@@ -10,11 +10,11 @@ RUN pip install geopandas netCDF4 shapely
 RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipykernel kernda gdal && \
     conda clean -tipsy
 
-COPY requirements.txt /tmp/
-RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip
+#COPY requirements.txt /tmp/
 # RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
+RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip
 RUN $CONDA_DIR/envs/python2/bin/pip install netCDF4 shapely geopandas pyqtgraph h5py matplotlib scipy threedigrid[geo,results] && \
-fix-permissions $CONDA_DIR && \
+    fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
 USER root
