@@ -5,4 +5,4 @@ FROM jupyter/python2:base
 RUN pip install pyqtgraph
 
 # Install python2 libraries
-RUN $CONDA_DIR/envs/python2/bin/pip install pyspatialite
+RUN $CONDA_DIR/envs/python2/bin/pip install ipywidgets
