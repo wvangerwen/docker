@@ -6,7 +6,7 @@ FROM jupyter/scipy-notebook:latest
 # Install python3 libraries
 RUN conda install gdal rtree
 RUN pip install --upgrade pip
-RUN pip install geopandas netCDF4 shapely threedigrid
+RUN pip install geopandas netCDF4 shapely threedigrid openpyxl
 #Upgrade fiona for better import support
 RUN pip install --pre fiona
 
