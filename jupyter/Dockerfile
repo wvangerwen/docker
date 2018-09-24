@@ -1,7 +1,7 @@
 # Choose your desired base image 
 FROM jupyter/python2:latest
 # Install python3 libraries
-RUN pip install fiona==1.8a1 folium
+RUN pip install fiona==1.8a1 folium descartes
 # RUN pip install pyqtgraph
 # Install python2 libraries
 # RUN conda install -n python2 rtree
