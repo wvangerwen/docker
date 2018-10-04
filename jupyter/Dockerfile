@@ -1,5 +1,5 @@
 # Choose your desired base image 
-FROM jupyter/python2:latest
+FROM hhnk_jupyter:latest
 # Install python3 libraries
 RUN pip install fiona==1.8a1 folium descartes apscheduler
 # RUN pip install pyqtgraph
