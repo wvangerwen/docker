@@ -10,5 +10,3 @@ RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip, threedigrid
 RUN $CONDA_DIR/envs/python2/bin/pip install requests clint descartes apscheduler
 #
 #Voor Peil_2_gekozen_peil moet fiona geupdate worden. 
-RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip, threedigrid
-
