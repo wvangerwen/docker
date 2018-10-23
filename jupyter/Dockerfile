@@ -7,6 +7,6 @@ RUN pip install fiona==1.8a1 folium descartes apscheduler
 # Install python2 libraries
 # RUN conda install -n python2 rtree
 RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip threedigrid
-RUN $CONDA_DIR/envs/python2/bin/pip install requests clint descartes apscheduler tqdm
+RUN $CONDA_DIR/envs/python2/bin/pip install requests clint descartes apscheduler tqdm folium
 #
 #Voor Peil_2_gekozen_peil moet fiona geupdate worden. 
