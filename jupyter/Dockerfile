@@ -1,7 +1,7 @@
 # Choose your desired base image 
 FROM hhnk_jupyter:latest
 # Install python3 libraries
-RUN pip install --upgrade pip numpy
+RUN pip install --upgrade pip
 RUN pip install fiona==1.8a1 folium descartes apscheduler xlrd xlwt
 # RUN pip install pyqtgraph
 # Install python2 libraries
