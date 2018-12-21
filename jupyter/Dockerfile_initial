@@ -6,7 +6,8 @@ FROM jupyter/scipy-notebook:latest
 # Install python3 libraries
 RUN conda install gdal rtree
 RUN pip install --upgrade pip
-RUN pip install geopandas netCDF4 shapely threedigrid openpyxl fiona==1.8a1
+RUN pip install geopandas netCDF4 shapely threedigrid openpyxl fiona==1.8a1 folium descartes apscheduler xlrd xlwt && \
+    plotly lizard_connector tqdm
 
 # Create a Python 2.x environment using conda including at least the ipython kernel
 # and the kernda utility. Add any additional packages you want available for use
@@ -16,8 +17,10 @@ RUN conda create --quiet --yes -p $CONDA_DIR/envs/python2 python=2.7 ipython ipy
 
 #COPY requirements.txt /tmp/
 # RUN $CONDA_DIR/envs/python2/bin/pip install --requirement /tmp/requirements.txt && \
-RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip
-RUN $CONDA_DIR/envs/python2/bin/pip install netCDF4 shapely geopandas pyqtgraph h5py matplotlib scipy threedigrid[geo,results] ipywidgets openpyxl xlrd xlwt fiona==1.8a1 && \
+RUN $CONDA_DIR/envs/python2/bin/pip install --upgrade pip numpy
+RUN $CONDA_DIR/envs/python2/bin/pip install netCDF4 shapely geopandas pyqtgraph h5py matplotlib scipy && \
+    threedigrid[geo,results] ipywidgets openpyxl xlrd xlwt fiona==1.8a1 requests clint descartes apscheduler && \
+    tqdm folium plotly lizard_connector && \    
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
