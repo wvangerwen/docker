@@ -2,7 +2,7 @@
 FROM hhnk_jupyter:latest
 # Install python3 libraries
 # RUN pip install numpy --upgrade pip numpy --upgrade
-RUN pip install tqdm
+RUN pip install tqdm qgrid
 
 # RUN pip install pyqtgraph
 # Install python2 libraries
