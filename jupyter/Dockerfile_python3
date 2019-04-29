@@ -1,16 +1,21 @@
 # The initial docker image to install all required packages. Installing the gdal package is quite cumbersome
 # and therefore the image that is create with this image is used for further development. 
+
+USER $NB_USER
+
+
 # Choose your desired base image 
 FROM jupyter/scipy-notebook:latest
 
 # Install python3 libraries
+RUN conda install anaconda
 RUN conda install -c conda-forge geopandas python=3.7
 
-RUN pip install --upgrade pip
-RUN pip install netCDF4 threedigrid tqdm apscheduler folium ipython=='7.1' qgrid
+# RUN pip install --upgrade pip
+# RUN pip install netCDF4 threedigrid tqdm apscheduler folium ipython=='7.1' qgrid
 
 # openpyxl fiona==1.8a1 descartes xlrd xlwt && \
 #    plotly lizard_connector 
 
 
-USER $NB_USER
+# USER $NB_USER
