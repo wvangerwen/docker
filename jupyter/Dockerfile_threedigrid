@@ -1,0 +1,4 @@
+# Choose your desired base image 
+FROM jupyter/scipy-notebook:latest
+
+RUN conda install -c conda-forge threedigrid
