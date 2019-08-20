@@ -12,10 +12,11 @@ RUN conda install -c conda-forge netCDF4 threedigrid tqdm apscheduler folium  qg
 RUN conda install -c conda-forge geopandas python=3.7 && \
       fix-permissions $CONDA_DIR
 
-
 RUN pip install --upgrade pip threedigrid
-RUN pip install ipython=='7.1' pyproj=='1.9.6' && \
+RUN pip install ipython=='7.1' pyproj=='1.9.6' jupyter_contrib_nbextensions && \
       fix-permissions /home/$NB_USER
+      
+RUN jupyter contrib nbextension install
       
 # netCDF4 threedigrid tqdm apscheduler folium ipython=='7.1' qgrid
 
