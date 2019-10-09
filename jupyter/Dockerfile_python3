@@ -16,7 +16,7 @@ RUN apt-get install -y --no-install-recommends \
         libxss1 \
         libgconf-2-4 \
         libnss3 \
-        libasound2 && \
+        libasound2
 
 # Install python3 libraries
 # RUN conda install anaconda
