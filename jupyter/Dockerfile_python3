@@ -8,6 +8,7 @@ FROM jupyter/scipy-notebook:latest
 USER root
 
 #plotly dependencies
+RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
         wget \
         xvfb \
