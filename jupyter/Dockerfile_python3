@@ -2,8 +2,8 @@
 # and therefore the image that is create with this image is used for further development. 
 
 # Choose your desired base image 
-FROM jupyter/scipy-notebook:latest
-# FROM hhnk_jupyter3
+# FROM jupyter/scipy-notebook:latest
+FROM hhnk_jupyter3
 
 USER root
 
