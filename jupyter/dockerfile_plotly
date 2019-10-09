@@ -1,6 +1,7 @@
 # The initial docker image to install all required packages. Installing the gdal package is quite cumbersome
 # and therefore the image that is create with this image is used for further development. 
-
+# based on:https://github.com/plotly/orca/issues/150
+# and: https://github.com/mathieuboudreau/orca-plotly-dockerfile/blob/master/Dockerfile
 # Choose your desired base image 
 # FROM jupyter/scipy-notebook:latest
 FROM hhnk_jupyter3
