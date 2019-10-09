@@ -7,7 +7,7 @@ FROM jupyter/scipy-notebook:latest
 
 USER root
 
-#plotly dependencies
+#plotly dependencies - https://github.com/plotly/orca/issues/150
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         wget \
