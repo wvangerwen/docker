@@ -1,0 +1,86 @@
+# The initial docker image to install all required packages. Installing the gdal package is quite cumbersome
+# and therefore the image that is create with this image is used for further development. 
+
+# Choose your desired base image 
+# FROM jupyter/scipy-notebook:latest
+FROM hhnk_jupyter3
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential=12.4ubuntu1 \
+        emacs \
+        git \
+        inkscape \
+        jed \
+        libsm6 \
+        libxext-dev \
+        libxrender1 \
+        lmodern \
+        netcat \
+        unzip \
+        nano \
+        curl \
+        wget \
+        gfortran \
+        cmake \
+        bsdtar  \
+        rsync \
+        imagemagick \
+        gnuplot-x11 \
+        libxtst6 \
+        libgtk2.0.0 \
+        libgconf2-4 \
+        xvfb \
+        libxss1 \
+        libopenblas-base \
+        python3-dev && \
+    apt-get clean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN cd $HOME/work;\
+    pip install --upgrade pip; \
+    pip install matplotlib \
+                plotly \
+                ipywidgets \
+                nbconvert==5.4.0 \
+                psutil; \
+    git clone --single-branch -b master https://github.com/mathieuboudreau/orca-plotly-dockerfile.git;\
+    cd notebooks;\
+    chmod -R 777 $HOME/work/orca-plotly-dockerfile;
+
+# Download orca AppImage, extract it, and make it executable under xvfb
+RUN wget https://github.com/plotly/orca/releases/download/v1.2.1/orca-1.2.1-x86_64.AppImage -P /home
+RUN chmod 777 /home/orca-1.2.1-x86_64.AppImage 
+
+# To avoid the need for FUSE, extract the AppImage into a directory (name squashfs-root by default)
+RUN cd /home && /home/orca-1.2.1-x86_64.AppImage --appimage-extract
+RUN printf '#!/bin/bash \nxvfb-run --auto-servernum --server-args "-screen 0 640x480x24" /home/squashfs-root/app/orca "$@"' > /usr/bin/orca
+RUN chmod 777 /usr/bin/orca
+RUN chmod -R 777 /home/squashfs-root/
+
+
+# Install python3 libraries
+# RUN conda install anaconda
+RUN conda install -c conda-forge netCDF4 threedigrid tqdm apscheduler folium qgrid line_profiler plotly rasterio
+RUN conda install -c conda-forge geopandas  && \
+      fix-permissions $CONDA_DIR
+# python=3.7
+
+RUN pip install --upgrade pip threedigrid
+RUN pip install ipython=='7.1' pyproj=='1.9.6' jupyter_contrib_nbextensions threedi_scenario_downloader && \
+      fix-permissions /home/$NB_USER
+      
+# RUN jupyter contrib nbextension install #no permissions
+      
+# netCDF4 threedigrid tqdm apscheduler folium ipython=='7.1' qgrid
+
+# openpyxl fiona==1.8a1 descartes xlrd xlwt && \
+#    plotly lizard_connector 
+
+
+# USER $NB_USER
+
+USER $NB_UID
