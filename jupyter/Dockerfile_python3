@@ -5,9 +5,10 @@
 # FROM jupyter/scipy-notebook:latest
 FROM hhnk_jupyter3
 
-USER root
-
+# USER root
+USER $NB_USER
 #plotly dependencies - https://github.com/plotly/orca/issues/150
+#https://github.com/mathieuboudreau/orca-plotly-dockerfile/blob/master/Dockerfile
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         wget \
@@ -26,7 +27,7 @@ RUN apt-get update && \
      printf '#!/bin/bash \nxvfb-run --auto-servernum --server-args "-screen 0 640x480x24" /home/orca/squashfs-root/app/orca "$@"' > /usr/bin/orca && \
      chmod +x /usr/bin/orca
      
-USER $NB_USER
+# USER $NB_USER
 
 # Install python3 libraries
 # RUN conda install anaconda
