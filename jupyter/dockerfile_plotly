@@ -4,7 +4,7 @@
 # and: https://github.com/mathieuboudreau/orca-plotly-dockerfile/blob/master/Dockerfile
 # Choose your desired base image 
 # FROM jupyter/scipy-notebook:latest
-FROM hhnk_jupyter3
+FROM hhnk_jupyter4
 
 USER root
 
@@ -81,7 +81,7 @@ RUN pip install ipython=='7.1' pyproj=='1.9.6' jupyter_contrib_nbextensions thre
 # openpyxl fiona==1.8a1 descartes xlrd xlwt && \
 #    plotly lizard_connector 
 
-
+WORKDIR $HOME/work/orca-plotly-dockerfile
 # USER $NB_USER
 
 USER $NB_UID
