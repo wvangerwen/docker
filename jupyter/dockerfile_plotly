@@ -65,8 +65,12 @@ RUN chmod -R 777 /home/squashfs-root/
 
 # Install python3 libraries
 # RUN conda install anaconda
-RUN conda install -c conda-forge netCDF4 threedigrid tqdm apscheduler folium qgrid line_profiler plotly rasterio
-RUN conda install -c conda-forge geopandas  && \
+
+RUN conda update -n base conda
+
+
+RUN conda install -c conda-forge netCDF4 threedigrid tqdm apscheduler folium qgrid line_profiler plotly rasterio geopandas
+RUN conda install -c conda-forge  && \
       fix-permissions $CONDA_DIR
 # python=3.7
 
