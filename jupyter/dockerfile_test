@@ -1,0 +1,3 @@
+FROM hhnk_jupyter4
+
+USER $NB_UID
