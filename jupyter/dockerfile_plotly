@@ -64,6 +64,9 @@ RUN pip install threedi_scenario_downloader && \
 # RUN pip install ipython=='7.1' pyproj=='1.9.6' jupyter_contrib_nbextensions threedi_scenario_downloader && \
 #      fix-permissions /home/$NB_USER
       
+#problems with projections in gdal3, when we downgrade proj to proj4 it works. 
+RUN conda install proj4
+
 # set password
 RUN wget https://raw.githubusercontent.com/wietsevangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
 
