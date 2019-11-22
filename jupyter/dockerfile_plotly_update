@@ -1,11 +1,11 @@
 FROM hhnk_jupyter3
 
 # set password
-
+USER root
 # RUN /home/jovyan/.jupyter/
 RUN rm /home/jovyan/.jupyter/jupyter_notebook_config.py
 RUN rm /home/jovyan/.jupyter/jupyter_notebook_config.py.1
 
-RUN wget https://raw.githubusercontent.com/wietsevangerwen/docker/master/jupyter/jupyter_notebook_config.py /home/jovyan/.jupyter/
+RUN wget https://raw.githubusercontent.com/wietsevangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
 
 USER $NB_UID
