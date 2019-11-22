@@ -4,6 +4,6 @@ FROM hhnk_jupyter3
 
 RUN /home/jovyan/.jupyter/
 
-RUN wget https://raw.githubusercontent.com/wietsevangerwen/docker/master/jupyter/jupyter_notebook_config.py -o /home/jovyan/.jupyter/
+RUN wget https://raw.githubusercontent.com/wietsevangerwen/docker/master/jupyter/jupyter_notebook_config.py -o /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 USER $NB_UID
