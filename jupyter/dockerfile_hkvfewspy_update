@@ -3,7 +3,7 @@ FROM hhnk_fews
 USER root
 
 # set password
-# RUN rm /home/jovyan/.jupyter/jupyter_notebook_config.py
+RUN rm /home/jovyan/.jupyter/jupyter_notebook_config.py
 RUN wget https://raw.githubusercontent.com/wvangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
 
 USER $NB_UID
