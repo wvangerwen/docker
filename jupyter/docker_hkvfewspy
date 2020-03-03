@@ -68,6 +68,7 @@ RUN pip install threedi_scenario_downloader && \
 RUN conda install proj4
 
 # set password
-RUN sudo wget https://raw.githubusercontent.com/wvangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
+RUN rm /home/jovyan/.jupyter/jupyter_notebook_config.py
+RUN wget https://raw.githubusercontent.com/wvangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
 
 USER $NB_UID
