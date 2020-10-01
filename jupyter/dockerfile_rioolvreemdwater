@@ -1,0 +1,18 @@
+FROM tensorflow/tensorflow:2.0.0-py3-jupyter
+WORKDIR /workspace
+
+# copy contents of repo to container
+COPY . /workspace
+
+# install requirements
+RUN pip install scikit-learn==0.20.2
+RUN pip install joblib numpy glob2 tqdm pandas keras==2.3.1 requests
+
+# define entrypoint
+ENTRYPOINT ["/workspace/run.sh"]
+RUN chmod +x /workspace/run.sh
+
+# get model weights and input scaler
+RUN mkdir /workspace/data; exit 0
+RUN mkdir /workspace/models; exit 0
+RUN tar -zxvf rvw_models.tar.gz
