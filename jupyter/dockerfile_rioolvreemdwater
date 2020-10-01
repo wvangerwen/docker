@@ -1,8 +1,11 @@
 FROM tensorflow/tensorflow:2.0.0-py3-jupyter
-WORKDIR /workspace
+
+USER root
+
+# WORKDIR /workspace
 
 # copy contents of repo to container
-COPY . /workspace
+# COPY . /workspace
 
 # install requirements
 RUN pip install scikit-learn==0.20.2
@@ -20,3 +23,5 @@ RUN pip install joblib numpy glob2 tqdm pandas keras==2.3.1 requests
 # set password
 RUN rm /home/jovyan/.jupyter/jupyter_notebook_config.py
 RUN wget https://raw.githubusercontent.com/wvangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
+
+USER $NB_UID
