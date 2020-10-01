@@ -3,7 +3,7 @@ FROM tensorflow/tensorflow:2.0.0-py3-jupyter
 USER root
 
 # WORKDIR /workspace
-sudo RUN mkdir /home/jovyan/work
+RUN sudo mkdir /home/jovyan/work
 
 # copy contents of repo to container
 # COPY . /workspace
