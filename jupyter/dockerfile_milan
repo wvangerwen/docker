@@ -1,0 +1,72 @@
+# The initial docker image to install all required packages. Installing the gdal package is quite cumbersome
+# and therefore the image that is create with this image is used for further development. 
+# based on:https://github.com/plotly/orca/issues/150
+# and: https://github.com/mathieuboudreau/orca-plotly-dockerfile/blob/master/Dockerfile
+# Choose your desired base image 
+FROM laudio/pyodbc:latest
+
+USER root
+
+#Install software so plotly can export images
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential=12.4ubuntu1 \
+        emacs \
+        git \
+        inkscape \
+        jed \
+        libsm6 \
+        libxext-dev \
+        libxrender1 \
+        lmodern \
+        netcat \
+        unzip \
+        nano \
+        curl \
+        wget \
+        gfortran \
+        cmake \
+        bsdtar  \
+        rsync \
+        imagemagick \
+        gnuplot-x11 \
+        libxtst6 \
+        libgtk2.0.0 \
+        libgconf2-4 \
+        xvfb \
+        libxss1 \
+        libopenblas-base \
+        python3-dev && \
+    apt-get clean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Download orca AppImage, extract it, and make it executable under xvfb
+RUN wget https://github.com/plotly/orca/releases/download/v1.1.1/orca-1.1.1-x86_64.AppImage -P /home
+RUN chmod 777 /home/orca-1.1.1-x86_64.AppImage 
+
+# To avoid the need for FUSE, extract the AppImage into a directory (name squashfs-root by default)
+RUN cd /home && /home/orca-1.1.1-x86_64.AppImage --appimage-extract
+RUN printf '#!/bin/bash \nxvfb-run --auto-servernum --server-args "-screen 0 640x480x24" /home/squashfs-root/app/orca "$@"' > /usr/bin/orca
+RUN chmod 777 /usr/bin/orca
+RUN chmod -R 777 /home/squashfs-root/
+
+# Install python3 libraries
+RUN conda update -n base conda
+RUN conda install -c conda-forge netCDF4 threedigrid tqdm apscheduler folium qgrid line_profiler plotly rasterio pandas geopandas descartes websocket-client && \
+      fix-permissions $CONDA_DIR
+# python=3.7
+
+RUN pip install --upgrade pip
+RUN pip install threedi_scenario_downloader threedi_api_client jupyter_contrib_nbextensions && \
+      fix-permissions /home/$NB_USER
+# RUN pip install ipython=='7.1' pyproj=='1.9.6' jupyter_contrib_nbextensions threedi_scenario_downloader && \
+#      fix-permissions /home/$NB_USER
+      
+#problems with projections in gdal3, when we downgrade proj to proj4 it works. 
+RUN conda install proj4
+
+# set password
+RUN wget https://raw.githubusercontent.com/wietsevangerwen/docker/master/jupyter/jupyter_notebook_config.py -P /home/jovyan/.jupyter/
+
+USER $NB_UID
