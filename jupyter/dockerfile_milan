@@ -3,11 +3,16 @@
 # based on:https://github.com/plotly/orca/issues/150
 # and: https://github.com/mathieuboudreau/orca-plotly-dockerfile/blob/master/Dockerfile
 # Choose your desired base image 
-FROM laudio/pyodbc:latest
+FROM jupyter/scipy-notebook:latest
 
 USER root
 
-
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    unixodbc-dev \
+    unixodbc \
+    libpq-dev 
+	
+	
 # Install python3 libraries
 RUN conda update -n base conda
 RUN conda install -c conda-forge netCDF4 threedigrid tqdm apscheduler folium qgrid line_profiler plotly rasterio pandas geopandas descartes websocket-client && \
